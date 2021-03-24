@@ -5,6 +5,12 @@ import { GET_API_THOUGHTS_URL } from './components/urls'
 
 export const App = () => {
   const [messageList, setMessageList] = useState([])
+  const [newMessage, setNewMessage] = useState('')
+
+  const newMessageChange = (event) => {
+    setNewMessage(event.target.value)
+    console.log(newMessage)
+  }
 
   useEffect(() => {
     fetchMessages()
@@ -12,55 +18,56 @@ export const App = () => {
 
   const fetchMessages = () => {
     fetch(GET_API_THOUGHTS_URL)
-      // .then((response) => {
-      //   return response.json();
-      // })
-      // .then((data) => {
 
+    // FIRST ATTEMPT FETCH, DOESNT WORK
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       const theJsonObject = data
+  //       const setMessageList = data
+  //       console.log(theJsonObject)
+  //   })
+  // }
+
+        // SECOND ATTEMPT FETCH
         .then(res => res.json())
         .then(data => setMessageList(data))
         .catch(err => console.error(err));
-
-
-        // The whole object from the api //
-        // const setMessageList = data
-        // const theWholeObject = data
-        // console.log(theWholeObject)
-        // console.log(setMessageList)
-    
-        // // an array with all the messages only //
-        // const messageArray = data.map(item => (item.message))
-        // console.log(messageArray)
-
-        // an array with all created at //
-        // const createdAt = data.map(item => (item.createdAt))
-        // console.log(createdAt)
-
-       // an array with all hearts //
-        // const hearts = data.map(item => (item.hearts))
-        // console.log(hearts)
-
-       // an array with all views //
-      //  const views = data.map(item => (item.__v))
-      //  console.log(views)
-
-       // an array with all id's //
-      //  const id = data.map(item => (item._id))
-      //  console.log(id)
-
        console.log(`here is the message list: ${messageList}`)
-       console.log('helloo')
-
+      //  console.log(data)
   }
 
   return (
-    <div>
-      Recent thoughts:
-      {/* {messageList.map(data => (
-        <div key={data._id}>
-          <h4>{message.text}</h4>
+    <>
+      <form onSubmit={event => event.preventDefault()}>
+        
+        <div class="input-section">
+          <label htmlFor="newMessage"></label>
+          <input
+            id={newMessage}
+            name="newMessage"
+            type="text"
+            value={newMessage}
+            onChange={newMessageChange}
+            placeholder="Type your message here"
+          />
+          <button>Press me!</button>
         </div>
-      ))} */}
-    </div>
+
+
+        <div class="message-list-section">
+          <h1>Recent thoughts:</h1>
+          {messageList.map(data => (
+            <div key={data._id}>
+              <h3>{data.message}</h3>
+              <p>Created at: {data.createdAt}</p>
+              <p> Likes: {data.hearts}</p>
+            </div>
+          ))}
+         </div>
+
+      </form>
+    </>
   )
 }
