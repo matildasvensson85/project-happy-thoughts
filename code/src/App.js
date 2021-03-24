@@ -14,35 +14,22 @@ export const App = () => {
 
   useEffect(() => {
     fetchMessages()
-  })
+  },[])
 
   const fetchMessages = () => {
     fetch(GET_API_THOUGHTS_URL)
-
-    // FIRST ATTEMPT FETCH, DOESNT WORK
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       const theJsonObject = data
-  //       const setMessageList = data
-  //       console.log(theJsonObject)
-  //   })
-  // }
-
-        // SECOND ATTEMPT FETCH
         .then(res => res.json())
         .then(data => setMessageList(data))
         .catch(err => console.error(err));
-       console.log(`here is the message list: ${messageList}`)
-      //  console.log(data)
   }
+
+  console.log(messageList)
 
   return (
     <>
       <form onSubmit={event => event.preventDefault()}>
         
-        <div class="input-section">
+        <div className="input-section">
           <label htmlFor="newMessage"></label>
           <input
             id={newMessage}
@@ -56,7 +43,7 @@ export const App = () => {
         </div>
 
 
-        <div class="message-list-section">
+        <div className="message-list-section">
           <h1>Recent thoughts:</h1>
           {messageList.map(data => (
             <div key={data._id}>
