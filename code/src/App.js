@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { GET_API_THOUGHTS_URL } from './components/urls'
-// import { POST_API_THOUGHTS_URL } from './components/urls'
+import { POST_API_THOUGHTS_URL } from './components/urls'
 
 export const App = () => {
   const [messageList, setMessageList] = useState([])
@@ -9,12 +9,12 @@ export const App = () => {
 
   const newMessageChange = (event) => {
     setNewMessage(event.target.value)
-    console.log(newMessage)
+    // console.log(newMessage)
   }
 
   useEffect(() => {
     fetchMessages()
-  },[])
+  },[messageList])
 
   const fetchMessages = () => {
     fetch(GET_API_THOUGHTS_URL)
@@ -23,11 +23,31 @@ export const App = () => {
         .catch(err => console.error(err));
   }
 
+const onSubmitMessage = (event) => {
+  event.preventDefault();
+  console.log(`Form submitted: ${newMessage}`)
+
+  const option = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ message: newMessage })
+  }
+  
+  fetch(POST_API_THOUGHTS_URL, option)
+    .then(res => res.json())
+    .then(receivedMessage => setMessageList([...messageList, receivedMessage]))
+    // console.log(newMessage)
+    .catch(err => console.error(err));
+}
+
+
   console.log(messageList)
 
   return (
     <>
-      <form onSubmit={event => event.preventDefault()}>
+      <form onSubmit={onSubmitMessage}>
         
         <div className="input-section">
           <label htmlFor="newMessage"></label>
@@ -39,7 +59,7 @@ export const App = () => {
             onChange={newMessageChange}
             placeholder="Type your message here"
           />
-          <button>Press me!</button>
+          <button type="submit">Submit message</button>
         </div>
 
 
