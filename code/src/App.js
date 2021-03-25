@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import { API_URL } from './components/urls'
-import { LIKE_API_URL } from './components/urls'
+import MessageList from './components/MessageList'
+import MessageForm from './components/MessageForm'
+
+import { API_URL } from './reusable/urls'
+import { LIKE_API_URL } from './reusable/urls'
+
 
 export const App = () => {
   const [messageList, setMessageList] = useState([])
   const [newMessage, setNewMessage] = useState('')
 
-  const newMessageChange = (event) => {
+  const onMessageChange = (event) => {
     setNewMessage(event.target.value)
   }
 
@@ -40,7 +44,7 @@ export const App = () => {
       .catch(err => console.error(err));
   }
 
-  const onHeartsIncrease = (id) => {
+  const handleHeartsIncrease = (id) => {
     const options = {
       method: 'POST',
       headers: {
@@ -65,25 +69,36 @@ export const App = () => {
 
   return (
     <>
+
       <form onSubmit={onSubmitMessage}>
-        
         <div className="input-section">
           <label htmlFor="newMessage"></label>
-          <input
-            id={newMessage}
-            name="newMessage"
-            type="text"
-            value={newMessage}
-            onChange={newMessageChange}
-            placeholder="Type your message here"
-          />
+            <input
+              id="newMessage"
+              name="newMessage"
+              type="text"
+              value={newMessage}
+              onChange={onMessageChange}
+              placeholder="Type your message here"
+            />
           <button type="submit">Submit message</button>
-          
         </div>
-        </form>
+      </form>
 
+      {/* <MessageForm
+        newMessage={newMessage}
+        onMessageChange={handleMessageChange}
+        onSubmitMessage={handleSubmitMessage}
+      /> */}
+       
+      <MessageList
+        messageList={messageList}
+        onHeartsIncrease={handleHeartsIncrease}
+      />
 
-        <div className="message-list-section">
+{/* messageList, item._id, item.message, item.createdAt, onHeartsIncrease, item.hearts */}
+
+        {/* <div className="message-list-section">
           <h1>Recent thoughts:</h1>
           {messageList.map((item) => (
             <div key={item._id}>
@@ -94,7 +109,7 @@ export const App = () => {
               </button>
             </div>
           ))}
-        </div>
+        </div> */}
       
 
     </>
