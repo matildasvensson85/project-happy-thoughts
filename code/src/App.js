@@ -26,14 +26,15 @@ export const App = () => {
         .catch(err => console.error(err));
   }
 
-  const onSubmitMessage = (event) => {
-    event.preventDefault();
-    console.log(`Form submitted: ${newMessage}`)
 
+  const onSubmitMessage = (event) => {
+    event.preventDefault()
+    console.log(`Form submitted: ${newMessage}`)
+  
     const option = {
       method: 'POST',
       headers: {
-      ' Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ message: newMessage })
     }
@@ -41,6 +42,7 @@ export const App = () => {
     fetch(API_URL, option)
       .then(res => res.json())
       .then(receivedMessage => setMessageList([receivedMessage, ...messageList]))
+      // console.log(newMessage)
       .catch(err => console.error(err));
   }
 
@@ -68,7 +70,24 @@ export const App = () => {
 
 
   return (
-    <>
+    <div>
+{/* 
+    <form onSubmit={onSubmitMessage}>
+        <div className="input-section">
+          <label htmlFor="newMessage"></label>
+          <input
+            id="newMessage"
+            name="newMessage"
+            type="text"
+            value={newMessage}
+            onChange={onMessageChange}
+            placeholder="Type your message here"
+          />
+          <button>Press me!</button>
+          <button type="submit">Submit message</button>
+        </div>
+      </form> */}
+
 
       <form onSubmit={onSubmitMessage}>
         <div className="input-section">
@@ -112,6 +131,6 @@ export const App = () => {
         </div> */}
       
 
-    </>
+    </div>
   )
 }
