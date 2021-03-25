@@ -42,30 +42,49 @@ export const App = () => {
   }
 
     // TEST ATTEMPT, NOT FINISHED //
-//   const onHeartsIncrease = (id) => {
-//     const options = {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//     }
+    
+  // const onHeartsIncrease = (id) => {
+  //   const options = {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //   }
+  //   fetch(LIKE_API_URL(id), options)
 
-//     fetch(LIKE_API_URL(id), options)
-//       .then(res => res.json())
-//       .then(receivedMessage => {
-//           const updatedMessageList = messageList.map(data.message => {
-//             if (data_id === receivedMessage._id) {
-//               console.log('True', data.message)
-//               data.hearts += 1
-//             }  else {
-//               console.log('False', data.message)
-//             }
-//           })
-//       })
-//       .catch(err => console.error(err))
+    //SECOND VERSION INSIDE TEST ATTEMPT, FROM STACK OVERFLOW
+    // .then(res => res.json())
+    // .then(newLike => {
+    //   const updatedMessageList = messageList.map(message => {
+    //     if (message._id === newLike._id) {
+    //       message.hearts += 1;
+    //     }
+    //     return message
+    //     }) 
+    //     setMessageList(updatedMessageList)
+
+    // })
+    // .catch(error => console.error(error))
+  // }
+
+
+      //FIRST VERSION INSIDE TEST ATTEMPT
+      // .then(res => res.json())
+      // .then(receivedMessage => {
+      //     const updatedMessageList = messageList.map(data.message => {
+      //       if (data_id === receivedMessage._id) {
+      //         console.log('True', data.message)
+      //         data.hearts += 1
+      //       }  else {
+      //         console.log('False', data.message)
+      //       }
+      //     })
+      // })
+      // .catch(err => console.error(err))
+
 // }
 
-
+// // FIRST ATTEMPT, NOT WORKING
   const onHeartsIncrease = (id) => {
     const options = {
       method: 'POST',
@@ -98,7 +117,9 @@ export const App = () => {
             placeholder="Type your message here"
           />
           <button type="submit">Submit message</button>
+          
         </div>
+        </form>
 
 
         <div className="message-list-section">
@@ -112,9 +133,9 @@ export const App = () => {
               </button>
             </div>
           ))}
-         </div>
+        </div>
+      
 
-      </form>
     </>
   )
 }
