@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-import { GET_API_THOUGHTS_URL } from './components/urls'
-import { POST_API_THOUGHTS_URL } from './components/urls'
+import { API_URL } from './components/urls'
+import { LIKE_API_URL } from './components/urls'
 
 export const App = () => {
   const [messageList, setMessageList] = useState([])
@@ -14,33 +14,71 @@ export const App = () => {
 
   useEffect(() => {
     fetchMessages()
-  },[messageList])
+  },[])
 
   const fetchMessages = () => {
-    fetch(GET_API_THOUGHTS_URL)
+    fetch(API_URL)
         .then(res => res.json())
         .then(data => setMessageList(data))
         .catch(err => console.error(err));
   }
 
-const onSubmitMessage = (event) => {
-  event.preventDefault();
-  console.log(`Form submitted: ${newMessage}`)
+  const onSubmitMessage = (event) => {
+    event.preventDefault();
+    console.log(`Form submitted: ${newMessage}`)
 
-  const option = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ message: newMessage })
-  }
+    const option = {
+      method: 'POST',
+      headers: {
+      ' Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: newMessage })
+    }
   
-  fetch(POST_API_THOUGHTS_URL, option)
-    .then(res => res.json())
-    .then(receivedMessage => setMessageList([...messageList, receivedMessage]))
-    // console.log(newMessage)
-    .catch(err => console.error(err));
-}
+    fetch(API_URL, option)
+      .then(res => res.json())
+      .then(receivedMessage => setMessageList([receivedMessage, ...messageList]))
+      .catch(err => console.error(err));
+  }
+
+    // TEST ATTEMPT, NOT FINISHED //
+//   const onHeartsIncrease = (id) => {
+//     const options = {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//     }
+
+//     fetch(LIKE_API_URL(id), options)
+//       .then(res => res.json())
+//       .then(receivedMessage => {
+//           const updatedMessageList = messageList.map(data.message => {
+//             if (data_id === receivedMessage._id) {
+//               console.log('True', data.message)
+//               data.hearts += 1
+//             }  else {
+//               console.log('False', data.message)
+//             }
+//           })
+//       })
+//       .catch(err => console.error(err))
+// }
+
+
+  const onHeartsIncrease = (id) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }
+
+    fetch(LIKE_API_URL(id), options)
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err))
+  }
 
 
   console.log(messageList)
@@ -65,11 +103,13 @@ const onSubmitMessage = (event) => {
 
         <div className="message-list-section">
           <h1>Recent thoughts:</h1>
-          {messageList.map(data => (
+          {messageList.map((data) => (
             <div key={data._id}>
               <h3>{data.message}</h3>
               <p>Created at: {data.createdAt}</p>
-              <p> Likes: {data.hearts}</p>
+              <button onClick={() => onHeartsIncrease(data._id)}> 
+                ♥ {data.hearts}
+              </button>
             </div>
           ))}
          </div>
