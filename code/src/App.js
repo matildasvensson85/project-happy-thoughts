@@ -9,7 +9,6 @@ export const App = () => {
 
   const newMessageChange = (event) => {
     setNewMessage(event.target.value)
-    // console.log(newMessage)
   }
 
   useEffect(() => {
@@ -41,19 +40,6 @@ export const App = () => {
       .catch(err => console.error(err));
   }
 
-    // TEST ATTEMPT, NOT FINISHED //
-    
-  // const onHeartsIncrease = (id) => {
-  //   const options = {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //   }
-  //   fetch(LIKE_API_URL(id), options)
-
-
-// // FIRST ATTEMPT, NOW WORKING
   const onHeartsIncrease = (id) => {
     const options = {
       method: 'POST',
@@ -63,29 +49,11 @@ export const App = () => {
     }
 
     fetch(LIKE_API_URL(id), options)
-    
-    //SECOND VERSION INSIDE TEST ATTEMPT, FROM STACK OVERFLOW
-  //   .then(res => res.json())
-  //   .then(newLike => {
-  //     const updatedMessageList = messageList.map(message => {
-  //       if (message._id === newLike._id) {
-  //         message.hearts += 1;
-  //       }
-  //       return message
-  //       }) 
-  //       setMessageList(updatedMessageList)
-
-  //   })
-  //   .catch(error => console.error(error))
-  // }
-
-      // MY VERSION
       .then(res => res.json())
       .then(receivedMessage => {
         const updatedMessageList = messageList.map(item => {
           if (item._id === receivedMessage._id) {
             item.hearts += 1;
-            // console.log('true', data.message)
           } 
           return item
         })
@@ -94,8 +62,6 @@ export const App = () => {
       .catch(err => console.error(err))
   }
 
-
-  // console.log(messageList)
 
   return (
     <>
