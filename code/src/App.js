@@ -52,39 +52,8 @@ export const App = () => {
   //   }
   //   fetch(LIKE_API_URL(id), options)
 
-    //SECOND VERSION INSIDE TEST ATTEMPT, FROM STACK OVERFLOW
-    // .then(res => res.json())
-    // .then(newLike => {
-    //   const updatedMessageList = messageList.map(message => {
-    //     if (message._id === newLike._id) {
-    //       message.hearts += 1;
-    //     }
-    //     return message
-    //     }) 
-    //     setMessageList(updatedMessageList)
 
-    // })
-    // .catch(error => console.error(error))
-  // }
-
-
-      //FIRST VERSION INSIDE TEST ATTEMPT
-      // .then(res => res.json())
-      // .then(receivedMessage => {
-      //     const updatedMessageList = messageList.map(data.message => {
-      //       if (data_id === receivedMessage._id) {
-      //         console.log('True', data.message)
-      //         data.hearts += 1
-      //       }  else {
-      //         console.log('False', data.message)
-      //       }
-      //     })
-      // })
-      // .catch(err => console.error(err))
-
-// }
-
-// // FIRST ATTEMPT, NOT WORKING
+// // FIRST ATTEMPT, NOW WORKING
   const onHeartsIncrease = (id) => {
     const options = {
       method: 'POST',
@@ -94,13 +63,39 @@ export const App = () => {
     }
 
     fetch(LIKE_API_URL(id), options)
+    
+    //SECOND VERSION INSIDE TEST ATTEMPT, FROM STACK OVERFLOW
+  //   .then(res => res.json())
+  //   .then(newLike => {
+  //     const updatedMessageList = messageList.map(message => {
+  //       if (message._id === newLike._id) {
+  //         message.hearts += 1;
+  //       }
+  //       return message
+  //       }) 
+  //       setMessageList(updatedMessageList)
+
+  //   })
+  //   .catch(error => console.error(error))
+  // }
+
+      // MY VERSION
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(receivedMessage => {
+        const updatedMessageList = messageList.map(item => {
+          if (item._id === receivedMessage._id) {
+            item.hearts += 1;
+            // console.log('true', data.message)
+          } 
+          return item
+        })
+        setMessageList(updatedMessageList)
+      })
       .catch(err => console.error(err))
   }
 
 
-  console.log(messageList)
+  // console.log(messageList)
 
   return (
     <>
@@ -124,12 +119,12 @@ export const App = () => {
 
         <div className="message-list-section">
           <h1>Recent thoughts:</h1>
-          {messageList.map((data) => (
-            <div key={data._id}>
-              <h3>{data.message}</h3>
-              <p>Created at: {data.createdAt}</p>
-              <button onClick={() => onHeartsIncrease(data._id)}> 
-                ♥ {data.hearts}
+          {messageList.map((item) => (
+            <div key={item._id}>
+              <h3>{item.message}</h3>
+              <p>Created at: {item.createdAt}</p>
+              <button onClick={() => onHeartsIncrease(item._id)}> 
+                ♥ {item.hearts}
               </button>
             </div>
           ))}
