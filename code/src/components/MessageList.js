@@ -1,29 +1,28 @@
 import React from 'react'
-
-import MessageElement from './MessageElement'
+import moment from 'moment'
 
 const MessageList = ({ messageList, onHeartsIncrease }) => {
     return (
-        <>
-            <div className="message-list-section">
-                <h1>Recent thoughts:</h1>
+        <section aria-label="List of all happy thoughts" className="list-wrapper">
                 {messageList.map(item => (
-                    <div key={item._id}>
-                        <h3>{item.message}</h3>
-                        <p>Created at: {item.createdAt}</p>
-                        <button onClick={() => onHeartsIncrease(item._id)}> 
-                        ♥ {item.hearts}
-                        </button>
+                    <div className="single-message-wrapper" key={item._id}>
+                        <div className="happy-message">
+                            <p tabIndex="0" className="happy-text">{item.message}</p>
+                        </div>
+                        <div className="like-and-date-wrapper">
+                            <p className="like-wrapper">
+                                <button 
+                                    onClick={() => onHeartsIncrease(item._id)}
+                                    className="heart-btn"> 
+                                    <span role="img" aria-label="heart">♥</span>
+                                </button>
+                                x {item.hearts}
+                            </p>
+                            <p tabIndex="0" className="created-at">{moment(item.createdAt).fromNow()}</p>
+                        </div>
                     </div>
-
-                    // <MessageElement
-                    //     key={item._id}
-                    //     item={item}
-                    //     onHeartsIncrease={handleHeartsIncrease}   
-                    // />
                 ))}
-            </div>
-        </>
+        </section>
     )
 }
 

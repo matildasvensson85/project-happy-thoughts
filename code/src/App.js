@@ -11,10 +11,6 @@ export const App = () => {
   const [messageList, setMessageList] = useState([])
   const [newMessage, setNewMessage] = useState('')
 
-  const handleMessageChange = (event) => {
-    setNewMessage(event.target.value)
-  }
-
   useEffect(() => {
     fetchMessages()
   },[])
@@ -24,6 +20,10 @@ export const App = () => {
         .then(res => res.json())
         .then(data => setMessageList(data))
         .catch(err => console.error(err));
+  }
+
+  const handleMessageChange = (event) => {
+    setNewMessage(event.target.value)
   }
 
   const handleSubmitMessage = (event) => {
@@ -68,23 +68,7 @@ export const App = () => {
 
 
   return (
-    <div>
-
-      {/* <form onSubmit={onSubmitMessage}>
-        <div className="input-section">
-          <label htmlFor="newMessage"></label>
-            <input
-              id="newMessage"
-              name="newMessage"
-              type="text"
-              value={newMessage}
-              onChange={onMessageChange}
-              placeholder="Type your message here"
-            />
-          <button type="submit">Submit message</button>
-        </div>
-      </form> */}
-
+    <section className="site-wrapper">
       <MessageForm
         newMessage={newMessage}
         onMessageChange={handleMessageChange}
@@ -95,23 +79,7 @@ export const App = () => {
         messageList={messageList}
         onHeartsIncrease={handleHeartsIncrease}
       />
-
-{/* messageList, item._id, item.message, item.createdAt, onHeartsIncrease, item.hearts */}
-
-        {/* <div className="message-list-section">
-          <h1>Recent thoughts:</h1>
-          {messageList.map((item) => (
-            <div key={item._id}>
-              <h3>{item.message}</h3>
-              <p>Created at: {item.createdAt}</p>
-              <button onClick={() => onHeartsIncrease(item._id)}> 
-                ♥ {item.hearts}
-              </button>
-            </div>
-          ))}
-        </div> */}
       
-
-    </div>
+    </section>
   )
 }

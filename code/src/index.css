@@ -11,3 +11,134 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.site-wrapper {
+/* border: solid brown; */
+ /* margin: 30px; */
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ margin: 0px;
+}
+
+/* FORM SECTION */
+
+/* parent */
+.form-wrapper {
+  border: solid 1px black;
+  background-color: #F2F0F0;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 20px 20px 0px 20px;
+  
+}
+/* child  */
+.form-title {
+  /* border: solid black; */
+  font-family: 'helvetica';
+  font-size: 15px;
+  font-weight: 400;
+  margin: 20px 20px 0px 20px;
+}
+
+/*child*/
+.input-field {
+  margin: 15px 0px 15px 0px;
+  padding: 10px 10px 40px 10px;
+  border: solid 1px darkgrey;
+  margin: 20px;
+}
+
+/* child  */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  margin: 2px 0 15px 15px;
+  width: fit-content;
+  padding: 10px 15px;
+  height: fit-content;
+  border-radius: 50px;
+  border: none;
+  background-color: #ffadad;
+  color: #2c2c2c;
+  cursor: pointer;
+  font-size: 13px;
+  outline: none;
+}
+
+/* LIST SECTION */
+/* parent */
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 20px;
+
+}
+/* child  */
+.single-message-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px black;
+  background-color: white;
+  margin-bottom: 20px;
+ 
+}
+/* child child */
+.happy-message {
+  margin: 20px;
+}
+/* child child child */
+
+.happy-text {
+  font-family: 'helvetica';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 135%;
+  margin: 0px;
+  width: 100%;
+  word-wrap: break-word;
+}
+/* child child  */
+.like-and-date-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+/* child child child */
+.like-wrapper {
+  margin: 20px;
+
+}
+/* child child child child  */
+.heart-btn {
+  background-color: #F2F0F0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: none;
+  margin-right: 6px;
+}
+/* child child child */
+.created-at {
+  margin: 20px;
+  font-family: 'helvetica';
+  font-size: 12px;
+  color: grey;
+}
+
+
+/* Media queries */
+@media (min-width: 768px) {
+.form-wrapper {
+  width: 50%;
+}
+
+.list-wrapper {
+  width: 50%;
+}
+
+}
