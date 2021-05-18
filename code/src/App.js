@@ -19,7 +19,7 @@ export const App = () => {
     fetch(API_URL)
         .then(res => res.json())
         .then(data => setMessageList(data))
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
   }
 
   const handleMessageChange = (event) => {
@@ -28,7 +28,6 @@ export const App = () => {
 
   const handleSubmitMessage = (event) => {
     event.preventDefault()
-    console.log(`Form submitted: ${newMessage}`)
   
     const option = {
       method: 'POST',
@@ -41,7 +40,8 @@ export const App = () => {
     fetch(API_URL, option)
       .then(res => res.json())
       .then(receivedMessage => setMessageList([receivedMessage, ...messageList]))
-      .catch(err => console.error(err));
+      .then(() => setNewMessage(''))
+      .catch(err => console.error(err))
   }
 
   const handleHeartsIncrease = (id) => {
@@ -57,7 +57,7 @@ export const App = () => {
       .then(receivedMessage => {
         const updatedMessageList = messageList.map(item => {
           if (item._id === receivedMessage._id) {
-            item.hearts += 1;
+            item.hearts += 1
           } 
           return item
         })
@@ -66,20 +66,16 @@ export const App = () => {
       .catch(err => console.error(err))
   }
 
-
   return (
     <section className="site-wrapper">
       <MessageForm
         newMessage={newMessage}
         onMessageChange={handleMessageChange}
-        onSubmitMessage={handleSubmitMessage}
-      />
+        onSubmitMessage={handleSubmitMessage}/>
        
       <MessageList
         messageList={messageList}
-        onHeartsIncrease={handleHeartsIncrease}
-      />
-      
+        onHeartsIncrease={handleHeartsIncrease}/>
     </section>
   )
 }

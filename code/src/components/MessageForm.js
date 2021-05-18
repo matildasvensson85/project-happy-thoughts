@@ -6,8 +6,7 @@ const MessageForm = ({ newMessage, onMessageChange, onSubmitMessage }) => {
             <form 
                 onSubmit={onSubmitMessage}
                 aria-label="input form for happy thoughts"
-                className="form-wrapper"
-                >
+                className="form-wrapper">
                 
                 <label htmlFor="newMessage">
                     <h1 tabIndex="0" className="form-title">What is making you happy right now?</h1>
@@ -20,14 +19,13 @@ const MessageForm = ({ newMessage, onMessageChange, onSubmitMessage }) => {
                     type="text"
                     value={newMessage}
                     onChange={onMessageChange}
-                    placeholder="Type here"
-                />
+                    placeholder="Type here"/>
 
                 <button 
                     type="submit"
                     className="submit-btn">
                     Send happy thought
-            </button>
+                </button>
                 
             </form>
       </>

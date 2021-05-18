@@ -13,7 +13,7 @@ const MessageList = ({ messageList, onHeartsIncrease }) => {
                             <p className="like-wrapper">
                                 <button 
                                     onClick={() => onHeartsIncrease(item._id)}
-                                    className="heart-btn"> 
+                                    className={`heart-btn ${item.hearts === 0 ? 'heart-btn-unliked' : 'heart-btn-liked'}`}>
                                     <span role="img" aria-label="heart">♥</span>
                                 </button>
                                 x {item.hearts}
