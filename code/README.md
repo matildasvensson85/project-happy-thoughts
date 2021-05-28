@@ -3,4 +3,4 @@ The happy version of Twitter. Post and read happy thoughts. Made with React, fet
 
 
 # View it live
-https://post-happy-thoughts-project.netlify.app/
+https://project-post-happy-thoughts.netlify.app/
