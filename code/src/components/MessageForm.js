@@ -19,7 +19,7 @@ const MessageForm = ({ newMessage, onMessageChange, onSubmitMessage }) => {
                     type="text"
                     value={newMessage}
                     onChange={onMessageChange}
-                    placeholder="Type here"/>
+                    placeholder="Type here, minimum 5 characters"/>
 
                 <button 
                     type="submit"
